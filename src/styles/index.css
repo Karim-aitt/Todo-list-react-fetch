@@ -1,12 +1,89 @@
+body{
+    background-color: #54a0ff;
+}
+.container{
+    background-color: white;
+    width: 300px;
+    margin: 100px auto;
+    min-height: 400px;
+    height: auto;
+    border-radius: 25px;
+    box-shadow: 10px 10px;
+    padding: 15px;
+}
 
-/* 
+h1{
+    background-color: rgba(137, 43, 226, 0.664);
+    border-radius: 10px 5px 10px 25px;
+    width: 200px;
+    text-align: center;
+    padding: 10px;
+    font-family: "Architects Daughter", cursive;
+    margin: 5px auto 15px;
+}
 
-    You can write your own styles here...
-    
-    
-    ...Or you can use the import command to include 
-    other sylesheets into your bunde as well, e.j:
-    
-    import 'relative/path/to/stylesheet.scss';
+.liClass{
+    font-family: "Architects Daughter", cursive;
+    overflow-wrap: break-word;
+    margin: 10px 10px;
+}
 
-*/
+.hiddenClass{
+    display: none;
+}
+.visiblityClass{
+    font-family: "Architects Daughter", cursive;
+}
+.pDefault{
+    font-family: "Architects Daughter", cursive;
+    text-decoration: underline;
+}
+
+input{
+
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 7px dotted #2e86de;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+input:focus{
+    border-width:0px;
+    border:none;
+    outline:none;
+    border-bottom: 7px dotted rgba(137, 43, 226, 0.664);
+}
+
+.buttonBorrar{
+    border-radius: 10px;
+    box-shadow: 3px 3px;
+    font-weight: bold;
+    margin-left: 5px;
+}
+.buttonBorrar:hover{
+    border-radius: 10px;
+    box-shadow: 3px 3px;
+}
+.buttonBorrar:active{
+    position: relative;
+    top: 2px;
+    box-shadow: inset 3px 3px rgba(0, 0, 0, 0.548);
+}
+.buttonAdd{
+    border-radius: 10px;
+    box-shadow: 3px 3px;
+    font-weight: bold;
+    height: 30px
+}
+.buttonAdd:hover{
+    border-radius: 10px;
+    box-shadow: 3px 3px;
+
+}
+.buttonAdd:active{
+    position: relative;
+    top: 2px;
+    box-shadow: inset 3px 3px rgba(0, 0, 0, 0.548);
+}

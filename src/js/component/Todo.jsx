@@ -64,7 +64,7 @@ function Todo() {
 										key={i}
 										className="buttonBorrar"
 										onClick={() => deleteTask(i)}>
-										<i class="fa-solid fa-trash"></i>
+										X
 									</button>
 								)}
 							</li>

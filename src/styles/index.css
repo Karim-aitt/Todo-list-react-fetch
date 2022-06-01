@@ -14,7 +14,7 @@ body{
 
 h1{
     background-color: rgba(137, 43, 226, 0.664);
-    border-radius: 10px 5px 10px 25px;
+    border-radius: 10px 15px 10px 35px;
     width: 200px;
     text-align: center;
     padding: 10px;
@@ -83,6 +83,24 @@ input:focus{
 
 }
 .buttonAdd:active{
+    position: relative;
+    top: 2px;
+    box-shadow: inset 3px 3px rgba(0, 0, 0, 0.548);
+}
+
+.buttonDeleteAll{
+    background-color: rgba(137, 43, 226, 0.664);
+    border-radius: 10px;
+    box-shadow: 3px 3px;
+    font-weight: bold;
+    height: 30px
+}
+.buttonDeleteAll:hover{
+    border-radius: 10px;
+    box-shadow: 3px 3px;
+
+}
+.buttonDeleteAll:active{
     position: relative;
     top: 2px;
     box-shadow: inset 3px 3px rgba(0, 0, 0, 0.548);

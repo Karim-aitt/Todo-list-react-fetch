@@ -27,11 +27,6 @@ const Home = () => {
 			})
 
 			.then((data) => {
-				// for (let i in data) {
-				// 	setItemArray((prev) => {
-				// 		return [...prev, data[i]]; //guardamos en la lista lo del server
-				// 	});
-				// }
 				setItemArray(data);
 				console.log(data);
 				setHidden(false);
@@ -48,85 +43,124 @@ const Home = () => {
 	}
 
 	function addItem() {
-		const aux = [...itemArray, { label: item.label, done: false }];
+		console.log(itemArray.length);
 
-		fetch("https://assets.breatheco.de/apis/fake/todos/user/karim", {
-			method: "PUT",
-			body: JSON.stringify(aux),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		})
-			.then((res) => {
-				if (!res.ok) {
-					console.log(res);
-					throw Error(res.statusText);
-				}
+		if (itemArray.length == 1 && itemArray[0].label == "invisible task") {
+			const aux = [{ label: item.label, done: false }];
+			fetch("https://assets.breatheco.de/apis/fake/todos/user/karim", {
+				method: "PUT",
+				body: JSON.stringify(aux),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			})
+				.then((res) => {
+					if (!res.ok) {
+						console.log(res);
+						throw Error(res.statusText);
+					}
 
-				return res.json();
+					return res.json();
+				})
+				.then((response) => {
+					console.log("Exito en updatear la lista", response);
+					setItemArray(aux);
+					setItem({ label: "" });
+					setHidden(false);
+				})
+				.catch((error) => console.log(error));
+		} else {
+			const aux = [...itemArray, { label: item.label, done: false }];
+
+			fetch("https://assets.breatheco.de/apis/fake/todos/user/karim", {
+				method: "PUT",
+				body: JSON.stringify(aux),
+				headers: {
+					"Content-Type": "application/json",
+				},
 			})
-			.then((response) => {
-				console.log("Exito en updatear la lista", response);
-				setItemArray(aux);
-				setItem({ label: "" });
-				setHidden(false);
-			})
-			.catch((error) => console.log(error));
+				.then((res) => {
+					if (!res.ok) {
+						console.log(res);
+						throw Error(res.statusText);
+					}
+
+					return res.json();
+				})
+				.then((response) => {
+					console.log("Exito en updatear la lista", response);
+					setItemArray(aux);
+					setItem({ label: "" });
+					setHidden(false);
+				})
+				.catch((error) => console.log(error));
+		}
 	}
 
 	function deleteTask(key) {
-		const newItemArray = itemArray.filter(
-			(itemInArray, index) => index != key
-		);
-		console.log({ newItemArray });
+		if (itemArray.length == 1) {
+			deleteAll();
+		} else {
+			const newItemArray = itemArray.filter(
+				(itemInArray, index) => index != key
+			);
+			console.log({ newItemArray });
 
-		fetch("https://assets.breatheco.de/apis/fake/todos/user/karim", {
-			method: "PUT",
-			body: JSON.stringify(newItemArray),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		})
-			.then((res) => {
-				if (!res.ok) {
-					console.log(res);
-					throw Error(res.statusText);
-				}
+			fetch("https://assets.breatheco.de/apis/fake/todos/user/karim", {
+				method: "PUT",
+				body: JSON.stringify(newItemArray),
+				headers: {
+					"Content-Type": "application/json",
+				},
+			})
+				.then((res) => {
+					if (!res.ok) {
+						console.log(res);
+						throw Error(res.statusText);
+					}
 
-				return res.json();
-			})
-			.then((response) => {
-				console.log("Exito en borrar la lista", response);
-				setItemArray(newItemArray);
-			})
-			.catch((error) => console.log(error));
+					return res.json();
+				})
+				.then((response) => {
+					console.log("Exito en borrar la lista", response);
+					setItemArray(newItemArray);
+				})
+				.catch((error) => console.log(error));
+		}
 
 		if (itemArray.length == 1) {
 			setHidden(true);
 		}
 	}
 
-	// useEffect(() => {
-	// 	fetch("https://assets.breatheco.de/apis/fake/todos/user/karim", {
-	// 		method: "PUT",
-	// 		body: JSON.stringify(itemArray),
-	// 		headers: {
-	// 			"Content-Type": "application/json",
-	// 		},
-	// 	})
-	// 		.then((res) => {
-	// 			if (!res.ok) {
-	// 				console.log(res);
-	// 				throw Error(res.statusText);
-	// 			}
+	function deleteAll() {
+		setItemArray([]);
+		console.log(itemArray + "hola item array");
+		let emptyArray = [{ label: "invisible task", done: false }];
 
-	// 			return res.json();
-	// 		})
-	// 		.then((response) =>
-	// 			console.log("Exito en updatear la lista", response)
-	// 		)
-	// 		.catch((error) => console.log(error));
-	// }, [itemArray]); //Cuando se actualice itemArray, se actualiza la lista del sv con itemArray
+		console.log(itemArray.length + "itemArray length");
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/karim", {
+			method: "PUT",
+			body: JSON.stringify(emptyArray),
+			headers: {
+				"Content-Type": "application/json",
+			},
+		})
+			.then((res) => {
+				if (!res.ok) {
+					console.log(res);
+					throw Error(res.statusText);
+				}
+
+				return res.json();
+			})
+			.then((response) => {
+				console.log("Exito en borrar TODA la lista", response);
+
+				setHidden(true);
+			})
+			.catch((error) => console.log(error));
+	}
 
 	return (
 		<div className="container">
@@ -152,6 +186,11 @@ const Home = () => {
 						);
 					})}
 				</ul>
+				<button
+					onClick={deleteAll}
+					className="buttonDeleteAll  d-flex mx-auto mt-5">
+					Borrar todo
+				</button>
 			</div>
 		</div>
 	);

@@ -13,13 +13,17 @@ function ItemList(props) {
 			className="liClass"
 			onMouseEnter={mouseHover}
 			onMouseLeave={mouseHover}>
-			{props.task}
+			{props.task === "invisible task" ? "No task, add one" : props.task}
 
-			{buttonShown && (
-				<button className="buttonBorrar" onClick={props.deleteItem}>
-					X
-				</button>
-			)}
+			{props.task !== "invisible task"
+				? buttonShown && (
+						<button
+							className="buttonBorrar"
+							onClick={props.deleteItem}>
+							X
+						</button>
+				  )
+				: null}
 		</li>
 	);
 }

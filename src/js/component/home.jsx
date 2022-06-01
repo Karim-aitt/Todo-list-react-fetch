@@ -186,9 +186,21 @@ const Home = () => {
 						);
 					})}
 				</ul>
+				<p
+					className={
+						!hidden
+							? "visibilityClass text-center mt-5"
+							: "hiddenClass"
+					}>
+					{itemArray.length == 1 &&
+					itemArray[0].label === "invisible task"
+						? 0
+						: itemArray.length}{" "}
+					Item left
+				</p>
 				<button
 					onClick={deleteAll}
-					className="buttonDeleteAll  d-flex mx-auto mt-5">
+					className="buttonDeleteAll  d-flex mx-auto mt-1">
 					Borrar todo
 				</button>
 			</div>

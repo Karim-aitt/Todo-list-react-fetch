@@ -1,24 +1,22 @@
 function getTask() {
-	return (
-		fetch("https://assets.breatheco.de/apis/fake/todos/user/karim", {
-			method: "GET",
-			headers: {
-				"Content-Type": "application/json",
-			},
+	return fetch("https://assets.breatheco.de/apis/fake/todos/user/karim", {
+		method: "GET",
+		headers: {
+			"Content-Type": "application/json",
+		},
+	})
+		.then((res) => {
+			if (!res.ok) {
+			}
+			return res.json();
 		})
-			.then((res) => {
-				// if (!res.ok) {
-				return res.json();
-				// }
-			})
-			// .then((data) => data)
+		.then((data) => data)
 
-			.catch((error) => console.log(error))
-	);
+		.catch((error) => console.log(error));
 }
 
 function postTask(task) {
-	fetch("https://assets.breatheco.de/apis/fake/todos/user/karim", {
+	fetch(`https://assets.breatheco.de/apis/fake/todos/user/karim`, {
 		method: "POST",
 		body: JSON.stringify(task),
 		headers: {
@@ -27,8 +25,8 @@ function postTask(task) {
 	})
 		.then((res) => {
 			if (!res.ok) {
-				return res.json();
 			}
+			return res.json();
 		})
 		.catch((error) => console.log(error));
 }
@@ -43,8 +41,10 @@ function updateTask(task) {
 	})
 		.then((res) => {
 			if (!res.ok) {
-				return res.json();
+				throw Error(res.statusText);
 			}
+
+			return res.json();
 		})
 		.catch((error) => console.log(error));
 }
@@ -58,8 +58,10 @@ function deleteTask(task) {
 	})
 		.then((res) => {
 			if (!res.ok) {
-				return res.json();
+				throw Error(res.statusText);
 			}
+
+			return res.json();
 		})
 		.catch((error) => console.log(error));
 }
